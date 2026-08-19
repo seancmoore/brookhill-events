@@ -1,6 +1,9 @@
 // Schedule data for Brook Hill Events. Dates/times/rooms come from the
 // St. John's Master Program (ActivityCalendar tab); titles, emoji and
 // descriptions are the per-session programming.
+// New students arrive roughly every two weeks, so Recreation and Social
+// Rooms run the SAME rotation each session (kickoff 3v3 + welcome night,
+// then the standard lineup). July 4th is the one special day.
 // Recreation = Recreation/AM Rec slots; Social Rooms = MP Room slots.
 window.BHA_SCHEDULE = {
   "recreation": [
@@ -11,16 +14,16 @@ window.BHA_SCHEDULE = {
       "loc": "DAC 128",
       "title": "3v3 Basketball Tournament",
       "emoji": "🏀",
-      "desc": "Bracket-style 3v3. Bring a team of three or get drafted on the spot. Winners stay on."
+      "desc": "Bracket-style 3v3 to kick off the session. Bring a team of three or get drafted on the spot."
     },
     {
       "date": "2026-07-03",
       "event": "Recreation",
       "time": "2-5pm",
       "loc": "DAC 128",
-      "title": "Ultimate Frisbee",
-      "emoji": "🥏",
-      "desc": "7v7 ultimate with rolling subs. The staff team steps in for the finale."
+      "title": "3v3 Basketball Tournament",
+      "emoji": "🏀",
+      "desc": "Bracket-style 3v3 to kick off the session. Bring a team of three or get drafted on the spot."
     },
     {
       "date": "2026-07-04",
@@ -45,12 +48,48 @@ window.BHA_SCHEDULE = {
       "event": "Recreation",
       "time": "2-5pm",
       "loc": "DAC 100",
-      "title": "Ping Pong & Pool Tournament",
-      "emoji": "🏓",
-      "desc": "Round-robin tables all afternoon. Prizes for the top seed at each table."
+      "title": "Ultimate Frisbee",
+      "emoji": "🥏",
+      "desc": "7v7 ultimate with rolling subs. The staff team steps in for the finale."
     },
     {
       "date": "2026-07-18",
+      "event": "Recreation",
+      "time": "2-5pm",
+      "loc": "DAC 128",
+      "title": "3v3 Basketball Tournament",
+      "emoji": "🏀",
+      "desc": "Bracket-style 3v3 to kick off the session. Bring a team of three or get drafted on the spot."
+    },
+    {
+      "date": "2026-07-20",
+      "event": "AM Rec",
+      "time": "9-11am",
+      "loc": "n/a",
+      "title": "Morning Volleyball",
+      "emoji": "🏐",
+      "desc": "Open volleyball rotations. All levels welcome, casual games to 15."
+    },
+    {
+      "date": "2026-07-21",
+      "event": "Recreation",
+      "time": "2-5pm",
+      "loc": "DAC 128",
+      "title": "Ultimate Frisbee",
+      "emoji": "🥏",
+      "desc": "7v7 ultimate with rolling subs. The staff team steps in for the finale."
+    },
+    {
+      "date": "2026-07-23",
+      "event": "AM Rec",
+      "time": "9-11am",
+      "loc": "DAC 128",
+      "title": "Capture the Flag",
+      "emoji": "🚩",
+      "desc": "Two full rounds, mixed teams. Meet at the gym doors."
+    },
+    {
+      "date": "2026-07-23",
       "event": "Recreation",
       "time": "2-5pm",
       "loc": "DAC 128",
@@ -59,85 +98,49 @@ window.BHA_SCHEDULE = {
       "desc": "Small-sided soccer with rolling subs. Quick games, winner stays on the court."
     },
     {
-      "date": "2026-07-20",
-      "event": "AM Rec",
-      "time": "9-11am",
-      "loc": "n/a",
-      "title": "Capture the Flag",
-      "emoji": "🚩",
-      "desc": "Campus-wide capture the flag across the quad. Two full rounds, mixed teams."
-    },
-    {
-      "date": "2026-07-21",
-      "event": "Recreation",
-      "time": "2-5pm",
-      "loc": "DAC 128",
-      "title": "Knockout & Free Throw Ladder",
-      "emoji": "🏀",
-      "desc": "Knockout lines plus a free throw ladder. Bracket posted at the door."
-    },
-    {
-      "date": "2026-07-23",
-      "event": "AM Rec",
-      "time": "9-11am",
-      "loc": "DAC 128",
-      "title": "Morning Badminton",
-      "emoji": "🏸",
-      "desc": "Doubles rotations to start the day. Rackets and birdies provided."
-    },
-    {
-      "date": "2026-07-23",
-      "event": "Recreation",
-      "time": "2-5pm",
-      "loc": "DAC 128",
-      "title": "Open Runs: Basketball",
-      "emoji": "🏀",
-      "desc": "Full-court open runs. Fives called at the scorer's table, music on."
-    },
-    {
       "date": "2026-07-28",
       "event": "Recreation",
       "time": "2-5pm",
       "loc": "DAC 100",
-      "title": "Table Tennis Doubles",
+      "title": "Ping Pong & Pool Tournament",
       "emoji": "🏓",
-      "desc": "Grab a partner for doubles. Ladder format, challenge the table above you."
+      "desc": "Round-robin tables all afternoon. Prizes for the top seed at each table."
     },
     {
       "date": "2026-07-31",
       "event": "AM Rec",
       "time": "9-11am",
       "loc": "DAC 128",
-      "title": "Morning Kickball",
-      "emoji": "⚾",
-      "desc": "Big-roller kickball, two innings per matchup. Sneakers required."
+      "title": "Morning Volleyball",
+      "emoji": "🏐",
+      "desc": "Open volleyball rotations. All levels welcome, casual games to 15."
     },
     {
       "date": "2026-07-31",
       "event": "Recreation",
       "time": "2-5pm",
       "loc": "DAC 128",
-      "title": "Volleyball Championship",
-      "emoji": "🏆",
-      "desc": "Group vs group bracket to close out July. Champs take the banner."
+      "title": "3v3 Basketball Tournament",
+      "emoji": "🏀",
+      "desc": "Bracket-style 3v3 to kick off the session. Bring a team of three or get drafted on the spot."
     },
     {
       "date": "2026-08-07",
       "event": "Recreation",
       "time": "2-5pm",
       "loc": "DAC 128",
-      "title": "End of Summer Olympics",
-      "emoji": "🥇",
-      "desc": "Stations across the gym: relays, shootouts, tug of war. Points per group, medals at the end."
+      "title": "Ultimate Frisbee",
+      "emoji": "🥏",
+      "desc": "7v7 ultimate with rolling subs. The staff team steps in for the finale."
     },
     {
       "date": "2026-08-10",
       "event": "AM Rec",
       "time": "9-11am",
       "loc": "DAC128",
-      "title": "Last Call Open Gym",
-      "emoji": "🎽",
-      "desc": "Final open gym of the summer. Basketball, volleyball and one last playlist."
+      "title": "Capture the Flag",
+      "emoji": "🚩",
+      "desc": "Two full rounds, mixed teams. Meet at the gym doors."
     }
   ],
   "social": [
@@ -164,12 +167,30 @@ window.BHA_SCHEDULE = {
       "event": "MP Room",
       "time": "7-10pm",
       "loc": "DAC 128",
+      "title": "Welcome Game Night",
+      "emoji": "🎲",
+      "desc": "Board games, Uno and giant Jenga to kick off the session. Snacks provided."
+    },
+    {
+      "date": "2026-07-03",
+      "event": "MP Room",
+      "time": "7-10pm",
+      "loc": "DAC 128",
+      "title": "Trivia Night",
+      "emoji": "🧠",
+      "desc": "Teams of up to six. Music, movies, sports and NYC rounds. Winners pick the next movie night film."
+    },
+    {
+      "date": "2026-07-05",
+      "event": "MP Room",
+      "time": "7-10pm",
+      "loc": "DAC 128",
       "title": "Movie Night",
       "emoji": "🍿",
       "desc": "Big screen in the MP Room, film picked by the trivia night winners. Popcorn on us."
     },
     {
-      "date": "2026-07-03",
+      "date": "2026-07-12",
       "event": "MP Room",
       "time": "7-10pm",
       "loc": "DAC 128",
@@ -178,67 +199,49 @@ window.BHA_SCHEDULE = {
       "desc": "Open karaoke with a live song queue from your phone. Duets encouraged."
     },
     {
-      "date": "2026-07-05",
-      "event": "MP Room",
-      "time": "7-10pm",
-      "loc": "DAC 128",
-      "title": "Mario Kart Tournament",
-      "emoji": "🎮",
-      "desc": "Bracket on the big screen. 32 spots, sign up at the door from 6:45."
-    },
-    {
-      "date": "2026-07-12",
-      "event": "MP Room",
-      "time": "7-10pm",
-      "loc": "DAC 128",
-      "title": "Board Game Café",
-      "emoji": "♟️",
-      "desc": "Chess, Catan, cards and casual tables all night. Bring your own favorite."
-    },
-    {
       "date": "2026-07-18",
       "event": "MP Room",
       "time": "7-10pm",
       "loc": "DAC 128",
-      "title": "Bingo & Prizes",
-      "emoji": "🎟️",
-      "desc": "Five rounds of bingo with prizes from the campus store. Last round is blackout."
+      "title": "Welcome Game Night",
+      "emoji": "🎲",
+      "desc": "Board games, Uno and giant Jenga to kick off the session. Snacks provided."
     },
     {
       "date": "2026-07-21",
       "event": "MP Room",
       "time": "7-10pm",
       "loc": "DAC 128",
-      "title": "Open Mic Night",
-      "emoji": "🎙️",
-      "desc": "Sing, rap, do standup, or just watch. Sign-ups at the door from 6:45."
+      "title": "Trivia Night",
+      "emoji": "🧠",
+      "desc": "Teams of up to six. Music, movies, sports and NYC rounds. Winners pick the next movie night film."
     },
     {
       "date": "2026-07-24",
       "event": "MP Room",
       "time": "7-10pm",
       "loc": "DAC 128",
-      "title": "Movie Night: Double Feature",
+      "title": "Movie Night",
       "emoji": "🍿",
-      "desc": "Two films back to back, crowd vote decides the second one. Popcorn refills all night."
+      "desc": "Big screen in the MP Room, film picked by the trivia night winners. Popcorn on us."
     },
     {
       "date": "2026-07-25",
       "event": "MP Room",
       "time": "7-10pm",
       "loc": "DAC 128",
-      "title": "Just Dance Showdown",
-      "emoji": "🕺",
-      "desc": "Head-to-head rounds on the projector. The crowd picks who moves on."
+      "title": "Karaoke Night",
+      "emoji": "🎤",
+      "desc": "Open karaoke with a live song queue from your phone. Duets encouraged."
     },
     {
       "date": "2026-07-29",
       "event": "MP Room",
       "time": "7-10pm",
       "loc": "DAC 128",
-      "title": "Trivia Night: The Rematch",
-      "emoji": "🧠",
-      "desc": "New rounds, new categories, same bragging rights. Defending champs wear the crowns."
+      "title": "Welcome Game Night",
+      "emoji": "🎲",
+      "desc": "Board games, Uno and giant Jenga to kick off the session. Snacks provided."
     },
     {
       "date": "2026-08-01",
@@ -263,9 +266,9 @@ window.BHA_SCHEDULE = {
       "event": "MP Room",
       "time": "7-10pm",
       "loc": "DAC 128",
-      "title": "Season Finale Game Night",
-      "emoji": "🏁",
-      "desc": "Last MP Room night of the summer. All the favorites, plus superlatives and awards."
+      "title": "Trivia Night",
+      "emoji": "🧠",
+      "desc": "Teams of up to six. Music, movies, sports and NYC rounds. Winners pick the next movie night film."
     }
   ],
   "trips": [
