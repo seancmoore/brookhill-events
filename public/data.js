@@ -18,9 +18,9 @@ window.BHA_SCHEDULE = {
       "event": "Recreation",
       "time": "2-5pm",
       "loc": "DAC 128",
-      "title": "Dodgeball Showdown",
-      "emoji": "🤾",
-      "desc": "Classic dodgeball, best of five rounds. The staff team steps in for the finale."
+      "title": "Ultimate Frisbee",
+      "emoji": "🥏",
+      "desc": "7v7 ultimate with rolling subs. The staff team steps in for the finale."
     },
     {
       "date": "2026-07-04",
@@ -117,9 +117,9 @@ window.BHA_SCHEDULE = {
       "event": "Recreation",
       "time": "2-5pm",
       "loc": "DAC 128",
-      "title": "Dodgeball Championship",
+      "title": "Volleyball Championship",
       "emoji": "🏆",
-      "desc": "The rematch everyone asked for. Group vs group bracket, champs take the banner."
+      "desc": "Group vs group bracket to close out July. Champs take the banner."
     },
     {
       "date": "2026-08-07",
