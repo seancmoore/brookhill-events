@@ -128,18 +128,33 @@
         openFlyer(s, { accent: accent, label: label, index: i });
       });
 
-      // Reservation controls for upcoming sessions only.
-      if (!isPast && R && category) {
+      // Reservation controls for upcoming sessions (or all of them with ?demo=1).
+      const demo = /[?&]demo=1/.test(location.search);
+      if ((!isPast || demo) && R && category) {
         const sid = R.sessionId(category, s.date, s.time);
-        a.setAttribute('data-rsvp', sid);
         const row = document.createElement('div');
         row.className = 'rsvp';
-        row.innerHTML =
-          '<span class="rsvp-cnt">👥 0 going</span>' +
-          '<button class="rsvp-btn" type="button">Reserve a spot</button>';
-        row.querySelector('.rsvp-btn').addEventListener('click', function () {
-          R.toggle({ date: s.date, time: s.time, loc: s.loc, event: s.event });
-        });
+        if (s.teamSize && R.registerTeam) {
+          // Team event: register a full team (captain + named players).
+          a.setAttribute('data-team', sid);
+          row.innerHTML =
+            '<span class="rsvp-cnt">🏆 0 teams</span>' +
+            '<button class="rsvp-btn" type="button">Register a team</button>';
+          row.querySelector('.rsvp-btn').addEventListener('click', function () {
+            R.registerTeam(
+              { date: s.date, time: s.time, loc: s.loc, event: s.event, title: s.title },
+              s.teamSize
+            );
+          });
+        } else {
+          a.setAttribute('data-rsvp', sid);
+          row.innerHTML =
+            '<span class="rsvp-cnt">👥 0 going</span>' +
+            '<button class="rsvp-btn" type="button">Reserve a spot</button>';
+          row.querySelector('.rsvp-btn').addEventListener('click', function () {
+            R.toggle({ date: s.date, time: s.time, loc: s.loc, event: s.event });
+          });
+        }
         a.appendChild(row);
       }
 

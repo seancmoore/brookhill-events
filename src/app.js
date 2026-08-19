@@ -51,8 +51,11 @@ const BHA = {
   category: "",
   _counts: {},
   _mine: {},
+  _teamCounts: {},
+  _teamMine: {},
   _verifying: false,
   _pending: null,
+  _teamPending: null, // { session, size, sid }
   _mode: "reserve",
   _onId: null,
 };
@@ -91,6 +94,21 @@ BHA._subscribe = function () {
     BHA._mine = mine;
     BHA._renderCounts();
   }, (err) => console.warn("rsvp snapshot:", err));
+
+  // Registered teams for team events (3v3, flag football, ...).
+  const tq = query(collectionGroup(db, "teams"), where("category", "==", BHA.category));
+  onSnapshot(tq, (snap) => {
+    const counts = {}, mine = {};
+    snap.forEach((docSnap) => {
+      const d = docSnap.data() || {};
+      if (!d.sessionId || d.status !== "registered") return;
+      counts[d.sessionId] = (counts[d.sessionId] || 0) + 1;
+      if (mySid && docSnap.id === mySid) mine[d.sessionId] = d.teamName || true;
+    });
+    BHA._teamCounts = counts;
+    BHA._teamMine = mine;
+    BHA._renderCounts();
+  }, (err) => console.warn("teams snapshot:", err));
 };
 
 BHA._renderCounts = function () {
@@ -104,6 +122,20 @@ BHA._renderCounts = function () {
     if (btn) {
       btn.classList.toggle("in", mine);
       btn.textContent = mine ? "✓ You're in" : "Reserve a spot";
+    }
+  });
+  document.querySelectorAll("[data-team]").forEach((slot) => {
+    const sid = slot.getAttribute("data-team");
+    const n = BHA._teamCounts[sid] || 0;
+    const mine = BHA._teamMine[sid];
+    const cnt = slot.querySelector(".rsvp-cnt");
+    const btn = slot.querySelector(".rsvp-btn");
+    if (cnt) cnt.textContent = "🏆 " + n + (n === 1 ? " team" : " teams");
+    if (btn) {
+      btn.classList.toggle("in", !!mine);
+      btn.textContent = mine
+        ? "✓ " + (typeof mine === "string" ? mine : "Team") + " registered"
+        : "Register a team";
     }
   });
 };
@@ -165,6 +197,94 @@ BHA.cancel = function (r) {
   const stu = remembered();
   if (!stu || !stu.studentId) return Promise.reject(new Error("no-id"));
   return BHA._write(r.sessionId, r.category, { date: r.date, time: r.time, loc: r.loc }, stu, "declined");
+};
+
+// ── team registration (3v3 basketball, 7v7 flag football, ...) ──
+// The captain checks in against the roster (same flow as a solo RSVP), then
+// names the team and lists every player. One team per captain per session.
+BHA.registerTeam = function (session, size) {
+  const sid = BHA.sessionId(BHA.category, session.date, session.time);
+  const go = (stu) => {
+    if (BHA._teamMine[sid]) {
+      // Already registered — tapping again withdraws the whole team.
+      const tn = typeof BHA._teamMine[sid] === "string" ? BHA._teamMine[sid] : "your team";
+      if (!window.confirm("Withdraw " + tn + " from this event?")) return;
+      BHA._writeTeam(sid, session, stu, { status: "withdrawn" })
+        .then(() => toast("Team withdrawn"))
+        .catch(() => toast("Something went wrong — try again", true));
+      return;
+    }
+    BHA._openTeamModal(session, size, sid, stu);
+  };
+  const stu = remembered();
+  if (stu && stu.studentId) go(stu);
+  else BHA.identify(go);
+};
+
+BHA._writeTeam = (sid, session, stu, extra) =>
+  setDoc(doc(db, "sessions", sid, "teams", stu.studentId), Object.assign({
+    name: stu.name,
+    group: stu.group || "",
+    studentId: stu.studentId,
+    sessionId: sid,
+    category: BHA.category,
+    date: session.date,
+    time: session.time || "",
+    loc: session.loc || "",
+    at: new Date().toISOString(),
+  }, extra), { merge: true });
+
+BHA._openTeamModal = function (session, size, sid, stu) {
+  BHA._teamPending = { session, size, sid, stu };
+  const m = document.getElementById("bha-team");
+  const dt = new Date(session.date + "T00:00:00");
+  m.querySelector("#bt-title").textContent = session.title || "Register a team";
+  m.querySelector("#bt-when").textContent =
+    dt.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" }) +
+    " · " + (session.time || "");
+  m.querySelector("#bt-note").textContent =
+    "Name your team and list all " + size + " players. " +
+    stu.name + ", you're checked in as the captain.";
+  let rows = '<label class="bm-lab">Team name</label>' +
+    '<input id="bt-name" class="bm-in" type="text" maxlength="40" placeholder="e.g. The Ballers">';
+  for (let i = 0; i < size; i++) {
+    rows += '<label class="bm-lab">Player ' + (i + 1) + (i === 0 ? ' <span class="bm-opt">(captain)</span>' : "") + "</label>" +
+      '<input class="bm-in bt-player" type="text" maxlength="60" placeholder="First and last name"' +
+      (i === 0 ? ' value="' + String(stu.name).replace(/"/g, "&quot;") + '" readonly' : "") + ">";
+  }
+  m.querySelector("#bt-rows").innerHTML = rows;
+  BHA._setTeamErr("");
+  m.classList.add("open");
+  setTimeout(() => { m.querySelector("#bt-name").focus(); }, 60);
+};
+
+BHA._closeTeamModal = function () {
+  const m = document.getElementById("bha-team");
+  if (m) m.classList.remove("open");
+  BHA._teamPending = null;
+};
+
+BHA._setTeamErr = function (msg) {
+  const e = document.getElementById("bt-err");
+  if (e) { e.textContent = msg || ""; e.style.display = msg ? "block" : "none"; }
+};
+
+BHA._submitTeam = function () {
+  const p = BHA._teamPending;
+  if (!p) return;
+  const m = document.getElementById("bha-team");
+  const teamName = m.querySelector("#bt-name").value.trim();
+  const players = Array.from(m.querySelectorAll(".bt-player")).map((i) => i.value.trim());
+  if (!teamName) { BHA._setTeamErr("Give your team a name"); return; }
+  if (players.some((n) => !n)) { BHA._setTeamErr("List all " + p.size + " players"); return; }
+  BHA._writeTeam(p.sid, p.session, p.stu, {
+    status: "registered",
+    teamName,
+    players,
+    size: p.size,
+  })
+    .then(() => { BHA._closeTeamModal(); toast(teamName + " is in! 🏆"); })
+    .catch(() => BHA._setTeamErr("Something went wrong — check your connection and try again."));
 };
 
 BHA.identify = function (onDone) {
@@ -294,7 +414,29 @@ function injectModal() {
   document.getElementById("bm-dob").addEventListener("keydown", (e) => { if (e.key === "Enter") BHA._submit(); });
 }
 
+// ── inject team-registration modal once ──
+function injectTeamModal() {
+  if (document.getElementById("bha-team")) return;
+  const div = document.createElement("div");
+  div.id = "bha-team";
+  div.innerHTML =
+    '<div class="bm-card">' +
+      '<div class="bm-title" id="bt-title">Register a team</div>' +
+      '<div class="bm-when" id="bt-when"></div>' +
+      '<p class="bm-note" id="bt-note"></p>' +
+      '<div id="bt-rows"></div>' +
+      '<div id="bt-err" class="bm-err"></div>' +
+      '<button id="bt-go" class="bm-go">Register team</button>' +
+      '<button id="bt-cancel" class="bm-cancel">Cancel</button>' +
+    "</div>";
+  document.body.appendChild(div);
+  div.addEventListener("click", (e) => { if (e.target === div) BHA._closeTeamModal(); });
+  document.getElementById("bt-go").addEventListener("click", BHA._submitTeam);
+  document.getElementById("bt-cancel").addEventListener("click", BHA._closeTeamModal);
+}
+
 window.BHAReserve = BHA;
 
-if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", injectModal);
-else injectModal();
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => { injectModal(); injectTeamModal(); });
+} else { injectModal(); injectTeamModal(); }

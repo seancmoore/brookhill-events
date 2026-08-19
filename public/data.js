@@ -14,6 +14,7 @@ window.BHA_SCHEDULE = {
       "loc": "DAC 128",
       "title": "3v3 Basketball Tournament",
       "emoji": "🏀",
+      "teamSize": 3,
       "desc": "Bracket-style 3v3 to kick off the session. Bring a team of three or get drafted on the spot."
     },
     {
@@ -23,6 +24,7 @@ window.BHA_SCHEDULE = {
       "loc": "DAC 128",
       "title": "3v3 Basketball Tournament",
       "emoji": "🏀",
+      "teamSize": 3,
       "desc": "Bracket-style 3v3 to kick off the session. Bring a team of three or get drafted on the spot."
     },
     {
@@ -59,6 +61,7 @@ window.BHA_SCHEDULE = {
       "loc": "DAC 128",
       "title": "3v3 Basketball Tournament",
       "emoji": "🏀",
+      "teamSize": 3,
       "desc": "Bracket-style 3v3 to kick off the session. Bring a team of three or get drafted on the spot."
     },
     {
@@ -84,9 +87,10 @@ window.BHA_SCHEDULE = {
       "event": "AM Rec",
       "time": "9-11am",
       "loc": "DAC 128",
-      "title": "Capture the Flag",
-      "emoji": "🚩",
-      "desc": "Two full rounds, mixed teams. Meet at the gym doors."
+      "title": "Flag Football",
+      "emoji": "🏈",
+      "teamSize": 7,
+      "desc": "7v7 flag football, mixed teams. Flags and balls provided, meet at the gym doors."
     },
     {
       "date": "2026-07-23",
@@ -122,6 +126,7 @@ window.BHA_SCHEDULE = {
       "loc": "DAC 128",
       "title": "3v3 Basketball Tournament",
       "emoji": "🏀",
+      "teamSize": 3,
       "desc": "Bracket-style 3v3 to kick off the session. Bring a team of three or get drafted on the spot."
     },
     {
@@ -138,9 +143,10 @@ window.BHA_SCHEDULE = {
       "event": "AM Rec",
       "time": "9-11am",
       "loc": "DAC128",
-      "title": "Capture the Flag",
-      "emoji": "🚩",
-      "desc": "Two full rounds, mixed teams. Meet at the gym doors."
+      "title": "Flag Football",
+      "emoji": "🏈",
+      "teamSize": 7,
+      "desc": "7v7 flag football, mixed teams. Flags and balls provided, meet at the gym doors."
     }
   ],
   "social": [

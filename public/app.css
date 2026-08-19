@@ -41,14 +41,15 @@ header .sub{font-size:14px;color:#64748b;margin-top:9px;line-height:1.5;}
 .rsvp-btn:active{transform:scale(0.96);}
 .rsvp-btn.in{background:rgba(74,222,128,0.12);border-color:rgba(74,222,128,0.4);color:#4ade80;}
 
-/* check-in modal */
-#bha-modal{position:fixed;inset:0;z-index:50;display:none;align-items:flex-end;justify-content:center;
+/* check-in + team-registration modals */
+#bha-modal,#bha-team{position:fixed;inset:0;z-index:50;display:none;align-items:flex-end;justify-content:center;
            background:rgba(4,4,12,0.72);backdrop-filter:blur(4px);padding:0;}
-#bha-modal.open{display:flex;}
+#bha-modal.open,#bha-team.open{display:flex;}
+#bha-team .bm-card{max-height:88svh;overflow-y:auto;}
 .bm-card{width:100%;max-width:480px;background:#0d0d1c;border:1.5px solid rgba(255,255,255,0.1);
          border-radius:22px 22px 0 0;padding:24px 22px calc(24px + env(safe-area-inset-bottom));
          animation:rise 0.28s cubic-bezier(0.2,0.7,0.25,1) both;}
-@media(min-width:540px){#bha-modal{align-items:center;}.bm-card{border-radius:22px;}}
+@media(min-width:540px){#bha-modal,#bha-team{align-items:center;}.bm-card{border-radius:22px;}}
 .bm-title{font-size:21px;font-weight:800;letter-spacing:-0.4px;color:#f8fafc;}
 .bm-when{font-size:13.5px;font-weight:600;color:#E7C75A;margin-top:4px;}
 .bm-note{font-size:13px;color:#64748b;margin:10px 0 18px;line-height:1.5;}
