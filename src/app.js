@@ -35,7 +35,16 @@ const db = getFirestore(app);
 const functions = getFunctions(app, "us-central1"); // verifyStudent lives here
 const auth = getAuth(app);
 
-const GROUPS = ["1C-NIA", "1G"];
+// Every group across the summer's sessions (arrivals roughly every 2 weeks).
+const GROUPS = [
+  "1C-NIA", "1G",
+  "3D", "3G",
+  "NYTOR1",
+  "5B", "5C", "5D", "5G",
+  "6C", "6G",
+  "TORNY2",
+  "7B", "7C", "7G",
+];
 const USER_DOMAIN = "@brookhill-staff.local"; // staff username -> internal email
 
 // ── remembered check-in (shared key with the disco app) ──

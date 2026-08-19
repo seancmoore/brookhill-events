@@ -128,9 +128,9 @@
         openFlyer(s, { accent: accent, label: label, index: i });
       });
 
-      // Reservation controls for upcoming sessions (or all of them with ?demo=1).
-      const demo = /[?&]demo=1/.test(location.search);
-      if ((!isPast || demo) && R && category) {
+      // Reservation controls on every listed session, so you can reserve (or
+      // register a team) directly from the listing.
+      if (R && category) {
         const sid = R.sessionId(category, s.date, s.time);
         const row = document.createElement('div');
         row.className = 'rsvp';

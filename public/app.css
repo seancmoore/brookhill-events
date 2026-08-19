@@ -58,6 +58,8 @@ header .sub{font-size:14px;color:#64748b;margin-top:9px;line-height:1.5;}
 .bm-in{width:100%;background:rgba(255,255,255,0.06);border:1.5px solid rgba(168,85,247,0.28);color:#f8fafc;
        border-radius:14px;padding:13px 15px;font-family:inherit;font-size:16px;outline:none;-webkit-appearance:none;appearance:none;}
 .bm-in:focus{border-color:rgba(201,168,76,0.6);}
+/* native <option> popups don't inherit the dark theme — force readable colors */
+select.bm-in option{background:#0d0d1c;color:#f8fafc;}
 .bm-err{display:none;margin-top:14px;font-size:13px;color:#fca5a5;line-height:1.45;}
 .bm-go{width:100%;margin-top:18px;border:none;border-radius:14px;padding:15px;cursor:pointer;
        font-family:inherit;font-size:16px;font-weight:800;color:#06121a;
