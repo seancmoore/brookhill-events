@@ -81,6 +81,27 @@ header .sub{font-size:14px;color:#64748b;margin-top:9px;line-height:1.5;}
 .tag.today{background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.26);color:#4ade80;}
 .tag.done{background:rgba(148,163,184,0.1);border:1px solid rgba(148,163,184,0.22);color:#94a3b8;}
 
+.info .desc{font-size:12.5px;color:#64748b;margin-top:6px;line-height:1.45;}
+.chev{flex-shrink:0;align-self:center;color:#334155;font-size:22px;padding-left:4px;}
+
+/* session flyer modal */
+#bha-flyer{position:fixed;inset:0;z-index:55;display:none;align-items:center;justify-content:center;
+           background:rgba(4,4,12,0.78);backdrop-filter:blur(5px);padding:22px;}
+#bha-flyer.open{display:flex;}
+.fl-card{position:relative;width:100%;max-width:400px;text-align:center;border-radius:26px;
+         border:1.5px solid rgba(255,255,255,0.12);background:#0d0d1c;padding:44px 28px 26px;
+         box-shadow:0 24px 70px rgba(0,0,0,0.6);animation:rise 0.28s cubic-bezier(0.2,0.7,0.25,1) both;}
+.fl-x{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.14);
+      background:rgba(255,255,255,0.06);color:#94a3b8;font-family:inherit;font-size:14px;cursor:pointer;}
+.fl-emoji{font-size:64px;line-height:1;filter:drop-shadow(0 6px 24px rgba(0,0,0,0.5));}
+.fl-kicker{font-size:11px;font-weight:700;letter-spacing:2.4px;text-transform:uppercase;color:rgba(201,168,76,0.72);margin-top:18px;}
+.fl-title{font-size:30px;font-weight:800;letter-spacing:-0.7px;line-height:1.1;color:#f8fafc;margin-top:8px;}
+.fl-when{font-size:14.5px;font-weight:700;color:#E7C75A;margin-top:12px;}
+.fl-loc{font-size:13px;font-weight:600;color:#94a3b8;margin-top:5px;}
+.fl-desc{font-size:14px;color:#94a3b8;line-height:1.55;margin-top:14px;}
+.fl-foot{margin-top:22px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);
+         font-size:11px;letter-spacing:0.6px;color:#4b5563;}
+
 .empty{text-align:center;padding:60px 20px;background:rgba(255,255,255,0.02);border:1.5px dashed rgba(168,85,247,0.15);border-radius:20px;color:#64748b;font-size:14px;}
 footer{margin-top:38px;text-align:center;color:#4b5563;font-size:12px;}
 footer .gold{color:rgba(201,168,76,0.6);}

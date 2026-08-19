@@ -4,16 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#060611">
-<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<title>Recreation · Brook Hill Events</title>
+<title>Trips &amp; Excursions · Brook Hill Events</title>
 <link rel="icon" href="uploads/bha-logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="app.css">
 <style>
-  .orb.a{background:radial-gradient(circle,rgba(34,211,238,0.10) 0%,transparent 65%);}
-  .orb.b{background:radial-gradient(circle,rgba(168,85,247,0.07) 0%,transparent 65%);}
+  .orb.a{background:radial-gradient(circle,rgba(251,191,36,0.10) 0%,transparent 65%);}
+  .orb.b{background:radial-gradient(circle,rgba(34,211,238,0.07) 0%,transparent 65%);}
 </style>
 </head>
 <body>
@@ -26,19 +25,17 @@
     </div>
     <header>
       <div class="kicker">Brook Hill Alliance Events</div>
-      <h1>🏀 Recreation</h1>
-      <p class="sub">Sports, games and activities. Drop in during a session below.</p>
+      <h1>🗽 Trips &amp; Excursions</h1>
+      <p class="sub">Day excursions across NYC plus overnight trips to Boston, Washington DC and Niagara Falls. Day trips depart at 1:15 PM.</p>
     </header>
     <div id="list" class="list"></div>
     <footer>Brook Hill Events by <span class="gold">The Brook Hill Alliance</span> · Summer 2026</footer>
   </div>
 
-  <script src="app.bundle.js"></script>
   <script src="data.js"></script>
   <script src="schedule.js"></script>
   <script>
-    BHAReserve.init('recreation');
-    renderSchedule('list', (window.BHA_SCHEDULE || {}).recreation || [], { accent: '#22d3ee', category: 'recreation' });
+    renderSchedule('list', (window.BHA_SCHEDULE || {}).trips || [], { accent: '#fbbf24', label: 'Trips & Excursions' });
   </script>
 </body>
 </html>
