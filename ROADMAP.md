@@ -10,20 +10,20 @@ This is the running list of what could come next, roughly in priority order.
       session, live.
 - [x] **My Reservations** (`my-reservations.html`) — a student's own reservations
       across categories, with cancel.
+- [x] **Per-session detail** — every Recreation/Social Rooms session has a
+      title, emoji and description in `data.js`; cards open a shareable
+      poster-style flyer (`#f=<index>` deep link).
+- [x] **More categories** — Trips & Excursions (`trips.html`) live on the hub:
+      the season's 41 day excursions + overnights from the master program.
 
 ## Near term
 - [ ] ~~Capacity caps + waitlist~~ — not wanted (per Panky).
 - [ ] **Cancel confirmation** — a small "Cancel your spot?" confirm instead of the
       current one-tap toggle, to avoid accidental cancels.
-- [ ] **Per-session detail** — what's actually happening (e.g. "3v3 basketball",
-      "movie night: TBD"). Add a `title`/`desc` field to `data.js` slots.
 - [ ] **Staff: export / past sessions** — let staff see past attendance and export
       a session's list (CSV / copy).
 
 ## Medium term
-- [ ] **More categories** — activate the ✨ "More to come" hub card for new event
-      types (trips, workshops). Each is a schedule page + `data.js` block; the
-      reservation plumbing is already generic (just pass a new `category`).
 - [ ] **Auto-regenerate `data.js`** — script the export from St. John's Master
       Program.xlsx (ActivityCalendar tab) so schedule changes are one command.
       Source: `Desktop\Work Summer 2026\Source`.
