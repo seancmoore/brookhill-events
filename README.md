@@ -1,80 +1,34 @@
 # Brook Hill Events
 
-The umbrella hub for **The Brook Hill Alliance** summer events. A single landing
-page that routes students to each category.
+The landing hub for Brook Hill Alliance's summer events. One page, a card per category, routes students to each one.
 
 Live: https://brookhill-events.web.app
-Project: `brookhill-disco-2026` (separate Hosting site `brookhill-events`)
 
-## Sections
-| Card | Status | Links to |
-|---|---|---|
-| 🪩 Discos | Live | https://brookhill-disco-2026.web.app/ |
-| 🏀 Recreation | Live + reservations | `recreation.html` |
-| 🎲 Social Rooms | Live + reservations | `social-rooms.html` |
-| ✨ More to come | Placeholder | — |
+## What's here
 
-Static site (plain HTML/CSS, no build step). To add or activate a section, edit
-the relevant `.card` in `public/index.html`: give it the `live` class, wrap it in
-an `<a href="…">`, and swap the pill to `pill go` / `● Live`.
+- **Discos** - links out to the disco app
+- **Recreation** - live, with reservations
+- **Social Rooms** - live, with reservations
+- More sections get added as they go live
 
-## Reservations (roster check-in)
-Recreation and Social Rooms sessions show a live "going" count and a **Reserve a
-spot** button. Reserving verifies the student SERVER-SIDE against the camp roster:
+It's a plain static site, no build step. To turn on a new section, find its card in `public/index.html`, wrap it in a link, and flip the status pill.
 
-- `public/reserve.js` collects first name + DOB (+ optional group) and calls the
-  disco app's already-deployed `verifyStudent` Cloud Function. The roster never
-  reaches the browser.
-- On a match it writes `sessions/{sessionId}/rsvps/{studentId}` in the **shared**
-  `brookhill-disco-2026` Firestore (`public/firebase-config.js` — not secret).
-- One `collectionGroup('rsvps')` listener drives the live counts per page.
-- A student who already checked in (here or in the disco app) is remembered via
-  `localStorage` and reserves in one tap; tapping again cancels.
+## Reservations
 
-`sessionId` = `category_date_time` (e.g. `recreation_2026-06-24_25pm`), computed
-identically in `reserve.js` and `schedule.js`.
+Recreation and Social Rooms show a live headcount and a reserve button. Reserving checks the student against the camp roster server-side through a Cloud Function - the roster itself never touches the browser. A confirmed reservation writes to the shared Firestore project used by the disco app, and a live listener keeps the counts updated for everyone looking at the page.
 
-### My Reservations (`my-reservations.html`)
-A student sees everything they've reserved across categories, with one-tap
-**Cancel spot**. Linked from the hub and from each schedule page's topbar. If the
-device isn't checked in yet, it offers a roster check-in (`BHAReserve.identify`).
-Filters `collectionGroup('rsvps')` by the remembered `studentId` + `status: going`.
+Students can see everything they've reserved (and cancel) from `my-reservations.html`, and returning to a page they're already checked into just works via a remembered local ID.
 
-### Staff dashboard (`staff.html`)
-Gated by a **real Firebase Auth account** — no password in the source. Staff sign
-in with a **username + password** (no email). Firebase's email/password provider
-needs an email-format id, so the page appends a fixed internal domain
-(`@brookhill-staff.local`, set in `staff.html` as `USER_DOMAIN`) behind the
-scenes — no real email is involved or shown. A single account signs in;
-`onAuthStateChanged` decides whether the dashboard shows. Lists every upcoming
-session per category with the roster of who's reserved (name + group), updating
-live. Merges `data.js` (so empty sessions still show) with the `rsvps` snapshot.
-Linked discreetly from the hub footer and `noindex`'d. Sign out via the topbar.
+## Staff dashboard
 
-**One-time setup** (Firebase console → project `brookhill-disco-2026`):
-1. **Authentication → Sign-in method → Email/Password → Enable.**
-2. **Authentication → Users → Add user** → for the email enter
-   `<username>@brookhill-staff.local` (e.g. `brookhill@brookhill-staff.local`),
-   and set a password.
+Gated behind a real Firebase Auth login - staff sign in with a username and password, no email involved on their end (internally it maps to a fixed dummy domain so Firebase's auth provider is happy). Shows every upcoming session and who's signed up for it, live.
 
-Staff then log in with just that `<username>` and password. That account is the
-only way into the dashboard.
+Setting it up requires enabling email/password auth in the Firebase console and adding a user manually - details are in the code if you're picking this up.
 
-> ⚠️ Still to do (see ROADMAP): the reservation docs remain **publicly readable**
-> by Firestore rules — the public schedule pages and the disco DJ dashboard rely
-> on that. They hold first names + group only (no DOB). Real login closes the
-> front door; making the name data itself staff-only is the next step and would
-> also touch the shared rules the disco app uses.
+## Deploying
 
-### ⚠️ Security rules live in the disco repo
-The `sessions/*/rsvps` write rules were added to **`brookhill-disco/firestore.rules`**
-(same database). They must be deployed from that repo, or reservations are denied:
-```bash
-cd ../brookhill-disco
-firebase deploy --only firestore:rules
+```
+firebase deploy --only hosting
 ```
 
-## Deploy
-```bash
-firebase deploy --only hosting          # from this repo (brookhill-events)
-```
+Note: the Firestore security rules for reservations actually live in the disco app's repo, since it's a shared database. Deploy those from there, not from here.
